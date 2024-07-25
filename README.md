@@ -1,6 +1,6 @@
-# Solidity LLM Subnet
+# bitsec Security Subnet
 
-This subnet generates Solidity code for agents to interact and deploy, ultimately enabling an autonomous economic agent space.
+This subnet incentivizes miners to find and fix vulnerabilities in codebases. Initially, the subnet will be focused on vulnerabilities in Solidity smart contracts. The scope of vulnerabilities will eventually expand to find bugs in subnet code, and other web2 codebases.
 
 ## Setup
 
