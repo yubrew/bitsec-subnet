@@ -1,0 +1,15 @@
+FROM python:3.11
+
+WORKDIR /app
+
+COPY neurons /app/neurons
+COPY requirements.txt /app
+
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
+
+# Default to running miner
+CMD ["python", "neurons/miner.py"]
