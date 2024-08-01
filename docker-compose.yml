@@ -1,0 +1,18 @@
+version: '3'
+services:
+  subtensor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - './chain/alice:/tmp/alice'
+      - './chain/bob:/tmp/bob'
+      - './chain/spec:/spec'
+      - '/Users/john/.bittensor:/root/.bittensor'
+    ports:
+      - '30334:30334'
+      - '9946:9946'
+      - '9934:9934'
+    environment:
+      - BT_DEFAULT_TOKEN_WALLET=5Ca8wibJNPwXrqdw4k3BxfuuVAYcSrT9d8DbEzPcA2AFSXGG

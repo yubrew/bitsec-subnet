@@ -43,27 +43,29 @@ BT_DEFAULT_TOKEN_WALLET=$(python3 -c 'import sys, json; print(json.load(sys.stdi
 
 echo "Setting up Docker container for subtensor..."
 
-# setup docker compose
-cat > docker-compose.yml <<EOF
-services:
-  subtensor:
-    build: .
-    restart: unless-stopped
-    volumes:
-      - "./chain/alice:/tmp/alice"
-      - "./chain/bob:/tmp/bob"
-      - "./chain/spec:/spec"
-      - "$HOME/.bittensor:/root/.bittensor"
-    ports:
-      - "30334:30334"
-      - "9946:9946"
-      - "9934:9934"
-    environment:
-      - BT_DEFAULT_TOKEN_WALLET=$BT_DEFAULT_TOKEN_WALLET
-EOF
+# use docker-compose.yml to build from Dockerfile
+# cat > docker-compose.yml <<EOF
+# services:
+#   subtensor:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     restart: unless-stopped
+#     volumes:
+#       - './chain/alice:/tmp/alice'
+#       - './chain/bob:/tmp/bob'
+#       - './chain/spec:/spec'
+#       - '/Users/john/.bittensor:/root/.bittensor'
+#     ports:
+#       - '30334:30334'
+#       - '9946:9946'
+#       - '9934:9934'
+#     environment:
+#       - BT_DEFAULT_TOKEN_WALLET=5Ca8wibJNPwXrqdw4k3BxfuuVAYcSrT9d8DbEzPcA2AFSXGG
+# EOF
 
-docker compose pull
-docker compose up -d --force-recreate
+# docker compose pull
+# docker compose up -d --force-recreate
 
 # btcli command wrapper
 run_btcli_command() {
