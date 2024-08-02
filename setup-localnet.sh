@@ -64,8 +64,8 @@ echo "Setting up Docker container for subtensor..."
 #       - BT_DEFAULT_TOKEN_WALLET=5Ca8wibJNPwXrqdw4k3BxfuuVAYcSrT9d8DbEzPcA2AFSXGG
 # EOF
 
-# docker compose pull
-# docker compose up -d --force-recreate
+docker compose pull
+docker compose up -d --force-recreate
 
 # btcli command wrapper
 run_btcli_command() {
@@ -114,6 +114,9 @@ btcli subnet register --wallet.name "$VALIDATOR_WALLET_NAME" --netuid 1 --wallet
 
 # Add stake to the validator
 btcli stake add --wallet.name "$VALIDATOR_WALLET_NAME" --wallet.hotkey default --subtensor.chain_endpoint "$CHAIN_ENDPOINT" --amount 100 --no_prompt
+
+# Add 20 min sleep to avoid SettingWeightsTooFast error
+sleep 1200
 
 # Set root weight
 btcli root register --wallet.name "$VALIDATOR_WALLET_NAME" --wallet.hotkey default --subtensor.chain_endpoint "$CHAIN_ENDPOINT" --no_prompt
