@@ -217,25 +217,3 @@ curl -X 'POST' \
 # Docker Setup
 
 View the `Makefile` for local usage.
-
-# My Project
-
-This is an example of a Mermaid diagram in a GitHub README.
-
-```mermaid
-graph TD;
-    A[Start] --> B{Decision Point};
-    B -->|Option 1| C[Process Step 1];
-    B -->|Option 2| D[Process Step 2];
-    C --> E[Process Step 3];
-    D --> F[Process Step 4];
-    E --> G[End];
-    F --> G[End];
-    style A fill:#f9f,stroke:#333,stroke-width:4px;
-    style B fill:#bbf,stroke:#333,stroke-width:2px;
-    style C fill:#bbf,stroke:#333,stroke-width:2px;
-    style D fill:#bbf,stroke:#333,stroke-width:2px;
-    style E fill:#bbf,stroke:#333,stroke-width:2px;
-    style F fill:#bbf,stroke:#333,stroke-width:2px;
-    style G fill:#f9f,stroke:#333,stroke-width:4px;
-```
