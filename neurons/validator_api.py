@@ -10,12 +10,12 @@ from fastapi.requests import Request
 from fastapi.responses import JSONResponse
 from typing import List, Any, Annotated
 
-from protocol.api.llm_solidity import LLMSolidityGenAPI, TextGenerationInput
+from neurons.protocol.api.llm_security import LLMSecurityGenAPI, TextGenerationInput
 
 async def main():
     app = FastAPI()
 
-    async with LLMSolidityGenAPI() as client:
+    async with LLMSecurityGenAPI() as client:
         @app.post("/api/generate")
         async def generate(input_parameters: Annotated[TextGenerationInput, Body()]) -> List[str]:
             """
@@ -35,7 +35,7 @@ async def main():
             - complexity increase: smart mechanism to select miners (instead of random)
             - increases latency for responses to users
             """
-            # TODO(Idris): Return top 5 miners
+            # TODO(John Yu): Return top 5 miners
             all_axons = client.get_all_axons()
             res = await client.query_api(input_parameters, all_axons)
             return res

@@ -1,7 +1,7 @@
 # The MIT License (MIT)
 # Copyright © 2023 Yuma Rao
-# TODO(developer): Idris Hanafi
-# Copyright © 2023 Idris Hanafi
+# TODO(developer): John Yu
+# Copyright © 2024 John Yu
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 # documentation files (the “Software”), to deal in the Software without restriction, including without limitation
@@ -20,7 +20,7 @@
 import bittensor as bt
 import uuid
 
-from protocol.protocol import LLMSolidityGen
+from protocol.protocol import LLMSecurityGen
 from protocol.validator.reward import get_rewards
 from protocol.utils.uids import get_random_uids
 
@@ -55,7 +55,7 @@ async def forward(self):
 
     responses = await self.dendrite(
         axons=[self.metagraph.axons[uid] for uid in miner_uids],
-        synapse=LLMSolidityGen(prompt_input=challenge),
+        synapse=LLMSecurityGen(prompt_input=challenge),
         deserialize=True,
         timeout=self.config.neuron.timeout,
     )

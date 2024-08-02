@@ -1,12 +1,13 @@
 """
 The LLM API that will interface the subnet
 """
+import traceback
 import torch
 import bittensor as bt
 from bittensor.subnets import SubnetsAPI
 from typing import List, Optional, Union, Any, Dict, AsyncGenerator
 
-from protocol.protocol import LLMSolidityGen
+from protocol.protocol import LLMSecurityGen
 from protocol.utils.config import config, check_config, add_args
 from protocol.api.get_query_axons import get_query_api_axons
 from protocol.utils.uids import get_random_uids
@@ -17,7 +18,7 @@ import asyncio
 class TextGenerationInput(BaseModel):
     prompt_text: str = ""
 
-class LLMSolidityGenAPI(SubnetsAPI):
+class LLMSecurityGenAPI(SubnetsAPI):
     def __init__(self):
         client_config = self.client_config()
         self.config = client_config
@@ -35,12 +36,12 @@ class LLMSolidityGenAPI(SubnetsAPI):
         self.metagraph.sync(subtensor=self.subtensor)
 
         self.netuid = client_config.netuid
-        self.name = "llm-solidity-gen"
+        self.name = "llm-security-gen"
 
         self.metagraph_resync: Task
 
-    def prepare_synapse(self, prompt_input: str) -> LLMSolidityGen:
-        synapse = LLMSolidityGen(prompt_input=prompt_input)
+    def prepare_synapse(self, prompt_input: str) -> LLMSecurityGen:
+        synapse = LLMSecurityGen(prompt_input=prompt_input)
         return synapse
 
     async def process_responses(
@@ -57,7 +58,7 @@ class LLMSolidityGenAPI(SubnetsAPI):
     async def get_responses(
         self,
         axons: Union[bt.axon, List[bt.axon]],
-        synapse: LLMSolidityGen,
+        synapse: LLMSecurityGen,
         timeout: int,
     ) -> AsyncGenerator[str, None]:
         if isinstance(axons, list):

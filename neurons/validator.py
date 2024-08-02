@@ -1,6 +1,6 @@
 # The MIT License (MIT)
 # Copyright © 2023 Yuma Rao
-# Copyright © 2023 Idris Hanafi
+# Copyright © 2024 John Yu
 # Copyright © 2024 [Your Name]
 
 import os
