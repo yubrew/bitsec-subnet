@@ -64,7 +64,7 @@ Run local devnet with build disabled as it's done in previous step:
 BUILD_BINARY=0 ./scripts/localnet.sh
 ```
 
-Now a websocket should be opened at the following port: `ws://127.0.0.1:9947`
+Now a websocket should be opened at the following port: `ws://127.0.0.1:9946`
 
 ### 2. Setup Wallet and get funds
 
@@ -91,21 +91,21 @@ To spin up a subnet, the owner requires `τ1000`.
 The following command funds the owner account `τ300` from the faucet:
 
 ```
-btcli wallet faucet --wallet.name owner --subtensor.chain_endpoint ws://127.0.0.1:9947
+btcli wallet faucet --wallet.name owner --subtensor.chain_endpoint ws://127.0.0.1:9946
 ```
 
 So the command will have to be ran a minimum of 4 times.
 Then fund the miners and validators as it costs `τ1` to register to a subnet.
 
 ```
-btcli wallet faucet --wallet.name miner --subtensor.chain_endpoint ws://127.0.0.1:9947
-btcli wallet faucet --wallet.name validator --subtensor.chain_endpoint ws://127.0.0.1:9947
+btcli wallet faucet --wallet.name miner --subtensor.chain_endpoint ws://127.0.0.1:9946
+btcli wallet faucet --wallet.name validator --subtensor.chain_endpoint ws://127.0.0.1:9946
 ```
 
 You can check the balance of your addresses with:
 
 ```
-btcli wallet balance --all --subtensor.chain_endpoint ws://localhost:9947 --subtensor.network local
+btcli wallet balance --all --subtensor.chain_endpoint ws://localhost:9946 --subtensor.network local
 ```
 
 ### 3. Create subnet
@@ -113,7 +113,7 @@ btcli wallet balance --all --subtensor.chain_endpoint ws://localhost:9947 --subt
 Run the following to create a subnet using the owner's wallet:
 
 ```
-btcli subnet create --wallet.name owner --subtensor.chain_endpoint ws://127.0.0.1:9947
+btcli subnet create --wallet.name owner --subtensor.chain_endpoint ws://127.0.0.1:9946
 ```
 
 ### 4. Run Miners and Validators
@@ -121,8 +121,8 @@ btcli subnet create --wallet.name owner --subtensor.chain_endpoint ws://127.0.0.
 Before running the miners and validators, we'd need to register the miners and validators to the subnet:
 
 ```
-btcli subnet register --wallet.name miner --wallet.hotkey default --subtensor.chain_endpoint ws://127.0.0.1:9947
-btcli subnet register --wallet.name validator --wallet.hotkey default --subtensor.chain_endpoint ws://127.0.0.1:9947
+btcli subnet register --wallet.name miner --wallet.hotkey default --subtensor.chain_endpoint ws://127.0.0.1:9946
+btcli subnet register --wallet.name validator --wallet.hotkey default --subtensor.chain_endpoint ws://127.0.0.1:9946
 ```
 
 > Note: If you're running locally, make sure to set different `--axon.port` and `--axon.external_port` for each nodes.
@@ -131,7 +131,7 @@ btcli subnet register --wallet.name validator --wallet.hotkey default --subtenso
 Add the stake:
 
 ```
-btcli stake add --wallet.name validator --wallet.hotkey default --subtensor.chain_endpoint ws://127.0.0.1:9947
+btcli stake add --wallet.name validator --wallet.hotkey default --subtensor.chain_endpoint ws://127.0.0.1:9946
 ```
 
 > Note: This step bootstraps the incentives on your new subnet by adding stake into its incentive mechanism.
@@ -139,7 +139,7 @@ btcli stake add --wallet.name validator --wallet.hotkey default --subtensor.chai
 Now you can validate that both miner and validator are registered:
 
 ```
-btcli subnet list --subtensor.chain_endpoint ws://127.0.0.1:9947
+btcli subnet list --subtensor.chain_endpoint ws://127.0.0.1:9946
 ```
 
 The output should be something like:
@@ -183,21 +183,27 @@ make run-api-local
 Lastly, register the validator on the root subnet and boost to set weights for your subnet so subnet receives emissions.
 
 ```
-btcli root register --wallet.name validator --wallet.hotkey default --subtensor.chain_endpoint ws://127.0.0.1:9947
-btcli root boost --netuid 1 --increase 1 --wallet.name validator --wallet.hotkey default --subtensor.chain_endpoint ws://127.0.0.1:9947
+btcli root register --wallet.name validator --wallet.hotkey default --subtensor.chain_endpoint ws://127.0.0.1:9946
+btcli root boost --netuid 1 --increase 1 --wallet.name validator --wallet.hotkey default --subtensor.chain_endpoint ws://127.0.0.1:9946
 ```
 
 Now you can verify that the incentive system works:
 
 ```
-btcli wallet overview --wallet.name validator --subtensor.chain_endpoint ws://127.0.0.1:9947
-btcli wallet overview --wallet.name miner --subtensor.chain_endpoint ws://127.0.0.1:9947
+btcli wallet overview --wallet.name validator --subtensor.chain_endpoint ws://127.0.0.1:9946
+btcli wallet overview --wallet.name miner --subtensor.chain_endpoint ws://127.0.0.1:9946
 ```
 
 ## Run the API
 
 ```
-python3 neurons/validator_api.py --netuid 1 --subtensor.chain_endpoint ws://127.0.0.1:9947 --wallet.name validator --wallet.hotkey default
+python3 neurons/validator_api.py --netuid 1 --subtensor.chain_endpoint ws://127.0.0.1:9946 --wallet.name validator --wallet.hotkey default
+```
+
+# run validator API locally
+
+```
+PYTHONPATH=$(pwd) python3 neurons/validator_api.py --netuid 1 --subtensor.chain_endpoint ws://127.0.0.1:9946 --wallet.name validator --wallet.hotkey default
 ```
 
 Test out it works by visiting: `localhost:8000/docs`
