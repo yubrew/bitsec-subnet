@@ -1,10 +1,19 @@
 /chain
-venv/
 
 # Byte-compiled / optimized / DLL files
-**/__pycache__/
-**/*.py[cod]
-**/*$py.class
+__pycache__/
+*.py[cod]
+*$py.class
 
 # macos
 .DS_Store
+
+# C extensions
+*.so
+
+# Environments
+.env
+.venv
+venv/
+venv.bak/
+*.env
