@@ -2,6 +2,42 @@
 
 This subnet incentivizes miners to find and fix vulnerabilities in codebases. Initially, the subnet will be focused on vulnerabilities in Solidity smart contracts. The scope of vulnerabilities will eventually expand to find bugs in subnet code, and other web2 codebases.
 
+```mermaid
+graph TD
+subgraph bitsec Subnet
+    SM1[subnet miner]
+    SM2[subnet miner]
+    SM3[subnet miner]
+    SBIM[Software Bug-finding Incentive Mechanism]
+    SV1[subnet validator]
+    SV2[subnet validator]
+    SV3[subnet validator]
+    SV4[subnet validator]
+
+    SM1 <--> SBIM
+    SM2 <--> SBIM
+    SM3 <--> SBIM
+
+    SBIM <--> SV1
+    SBIM <--> SV2
+    SBIM <--> SV3
+    SBIM <--> SV4
+end
+
+subgraph Blockchain
+    YC[Yuma Consensus]
+end
+
+SV3 --> YC
+
+%% Styling
+classDef highlighted stroke-width:4px,stroke:#000
+class SV3 highlighted
+
+%% Layout
+linkStyle default stroke-width:2px
+```
+
 ## Setup
 
 The setup involves the following steps:
