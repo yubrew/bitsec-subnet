@@ -1,0 +1,29 @@
+## packages to install without versions
+
+## converts to latest versions
+# pip install pip-tools
+# pip-compile --upgrade requirements.in
+
+bittensor
+torch
+scikit-learn
+loguru
+tensorflow
+opencv-python
+numpy
+pillow
+pandas
+diffusers
+transformers
+matplotlib
+torchvision
+torchaudio
+datasets
+accelerate
+tensorboardx
+tf-keras
+httpx
+wandb
+fastapi
+uvicorn
+openai
