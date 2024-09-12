@@ -28,14 +28,14 @@ import bittensor as bt
 from typing import List, Union
 from traceback import print_exception
 
-from bitmind.base.neuron import BaseNeuron
-from bitmind.base.utils.weight_utils import (
+from bitsec.base.neuron import BaseNeuron
+from bitsec.base.utils.weight_utils import (
     process_weights_for_netuid,
     convert_weights_and_uids_for_emit,
 )  # TODO: Replace when bittensor switches to numpy
 
-from bitmind.utils.mock import MockDendrite
-from bitmind.utils.config import add_validator_args
+from bitsec.utils.mock import MockDendrite
+from bitsec.utils.config import add_validator_args
 
 
 class BaseValidatorNeuron(BaseNeuron):
