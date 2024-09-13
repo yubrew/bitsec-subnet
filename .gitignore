@@ -18,3 +18,6 @@ __pycache__/
 venv/
 venv.bak/
 *.env
+
+# sample code for tests
+/samples
