@@ -62,6 +62,7 @@ echo "Setting up Docker container for subtensor..."
 #       - '9934:9934'
 #     environment:
 #       - BT_DEFAULT_TOKEN_WALLET=5Ca8wibJNPwXrqdw4k3BxfuuVAYcSrT9d8DbEzPcA2AFSXGG
+#       - OPENAI_API_KEY
 # EOF
 
 docker compose pull
