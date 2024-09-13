@@ -46,21 +46,29 @@ class Miner(BaseMinerNeuron):
 
         try:
             bt.logging.info(f"Analyzing Solidity code for vulnerabilities: {synapse.solidity_input[:100]}...")
-            client = OpenAI()
-            completion = client.chat.completions.create(
-                model="gpt-4",
-                messages=[
-                    {"role": "system", "content": "You are a Solidity security expert. Analyze the given code for vulnerabilities and suggest fixes. Respond in JSON format with 'vulnerabilities' and 'fixes' arrays."},
-                    {"role": "user", "content": f"Analyze this Solidity code:\n\n{synapse.solidity_input}"},
-                ]
-            )
+            # comment out openai to avoid api error
+            # client = OpenAI()
+            # completion = client.chat.completions.create(
+            #     model="gpt-4",
+            #     messages=[
+            #         {"role": "system", "content": "You are a Solidity security expert. Analyze the given code for vulnerabilities and suggest fixes. Respond in JSON format with 'vulnerabilities' and 'fixes' arrays."},
+            #         {"role": "user", "content": f"Analyze this Solidity code:\n\n{synapse.solidity_input}"},
+            #     ]
+            # )
 
-            analysis = completion.choices[0].message.content
+            # analysis = completion.choices[0].message.content
+
+
+
+
             # Parse the JSON response
-            import json
-            result = json.loads(analysis)
-            vulnerabilities = result.get('vulnerabilities', [])
-            fixes = result.get('fixes', [])
+            # import json
+            # result = json.loads(analysis)
+            # vulnerabilities = result.get('vulnerabilities', [])
+            # fixes = result.get('fixes', [])
+
+            vulnerabilities = ["vulnerabilities"]
+            fixes = ["fixes"]
 
         except Exception as e:
             bt.logging.error(f"Error during vulnerability analysis: {e}")

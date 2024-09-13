@@ -43,15 +43,16 @@ async def forward(self):
     bt.logging.info(f"metagraph: {self.metagraph}")
     bt.logging.info(f"metagraph axons: {self.metagraph.axons}")
 
-    client = OpenAI()
-    completion = client.chat.completions.create(
-        model="gpt-4",
-        messages=[
-            {"role": "system", "content": "You are an LLM that will respond with only simple language that returns in the form of: `Create a solidity contract with {randomly generate a name here}`"},
-            {"role": "user", "content": "Give me a sample prompt that asks an LLM to generate a sample solidity contract"},
-        ]
-    )
-    challenge = completion.choices[0].message.content
+    # client = OpenAI()
+    # completion = client.chat.completions.create(
+    #     model="gpt-4",
+    #     messages=[
+    #         {"role": "system", "content": "You are an LLM that will respond with only simple language that returns in the form of: `Create a solidity contract with {randomly generate a name here}`"},
+    #         {"role": "user", "content": "Give me a sample prompt that asks an LLM to generate a sample solidity contract"},
+    #     ]
+    # )
+    # challenge = completion.choices[0].message.content
+    challenge = "sample challenge"
 
     responses = await self.dendrite(
         axons=[self.metagraph.axons[uid] for uid in miner_uids],

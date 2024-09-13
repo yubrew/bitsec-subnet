@@ -52,6 +52,7 @@ class LLMSecurityGenAPI(SubnetsAPI):
             bt.logging.info(f"Parsing response: {response}...")
             if not response:
                 continue
+            bt.logging.info(f"Parsing response: {response.vulnerabilities} {response.fixes}...")
             outputs.append(response)
         return outputs
 
