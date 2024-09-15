@@ -21,3 +21,6 @@ venv.bak/
 
 # sample code for tests
 /samples
+
+# contract dependencies
+/node_modules
