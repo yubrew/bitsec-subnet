@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY neurons /app/neurons
 COPY requirements.txt /app
+COPY samples /app/samples
 
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
