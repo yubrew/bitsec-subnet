@@ -24,3 +24,9 @@ venv.bak/
 
 # contract dependencies
 /node_modules
+package-lock.json
+package.json
+
+# foundry output
+/out
+/cache
