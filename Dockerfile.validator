@@ -1,23 +1,32 @@
 FROM python:3.11
 
+ENV PATH="/opt/venv/bin:$PATH" \
+# add /app to PYTHONPATH to run neurons
+  PYTHONPATH="/app:${PYTHONPATH:-}"
+
 WORKDIR /app
 
-COPY neurons /app/neurons
-COPY requirements.txt /app
-COPY samples /app/samples
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
+# Create and activate virtual environment
 RUN python -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
 
+# Install Python dependencies
+COPY requirements.txt .
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
 # Install Foundry
-RUN curl -L https://foundry.paradigm.xyz | bash
+RUN curl -L https://foundry.paradigm.xyz | bash && \
+    /root/.foundry/bin/foundryup
 ENV PATH="/root/.foundry/bin:$PATH"
-RUN ~/.foundry/bin/foundryup
 
-# Set PYTHONPATH to include the current directory
-ENV PYTHONPATH="/app:$PYTHONPATH"
+# Copy application code
+COPY neurons ./neurons
+COPY samples ./samples
 
+# Set the entrypoint
 CMD ["python", "-m", "neurons.validator"]
