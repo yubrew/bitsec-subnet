@@ -232,7 +232,7 @@ protobuf==5.28.1
     # via tensorboardx
 psutil==6.0.0
     # via accelerate
-py==1.11.1
+py==1.11.0
     # via retry
 py-bip39-bindings==0.1.11
     # via substrate-interface

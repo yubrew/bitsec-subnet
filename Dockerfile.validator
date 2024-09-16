@@ -1,8 +1,8 @@
 FROM python:3.11
 
-ENV PATH="/opt/venv/bin:$PATH" \
 # add /app to PYTHONPATH to run neurons
-  PYTHONPATH="/app:${PYTHONPATH:-}"
+ENV PATH="/opt/venv/bin:$PATH" \
+  PYTHONPATH="/app"
 
 WORKDIR /app
 
