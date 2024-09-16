@@ -8,10 +8,10 @@ build-validator-docker:
 	docker build -t subnet-llm-validator -f Dockerfile.validator .
 
 run-validator-local:
-	docker run --env-file .env --network="host" -v $${HOME}/.bittensor/wallets:/root/.bittensor/wallets -it subnet-llm-validator python neurons/validator.py --netuid 1 --subtensor.chain_endpoint ws://127.0.0.1:9946 --wallet.name validator --wallet.hotkey default --axon.port 8094 --axon.external_port 8094 --logging.debug
+	docker run --env-file .env --network="host" -v $${HOME}/.bittensor/wallets:/root/.bittensor/wallets -it subnet-llm-validator python neurons/validator.py --netuid 1 --subtensor.chain_endpoint ws://127.0.0.1:9946 --wallet.name validator --wallet.hotkey default --axon.port 8091 --axon.external_port 8091 --logging.debug
 
 run-validator-testnet:
-	docker run --env-file .env --network="host" -v $${HOME}/.bittensor/wallets:/root/.bittensor/wallets -it subnet-llm-validator python neurons/validator.py --netuid 204 --subtensor.chain_endpoint test --wallet.name validator --wallet.hotkey default --axon.port 8094 --axon.external_port 8094 --logging.debug
+	docker run --env-file .env -p 8091:8091 -v $${HOME}/.bittensor/wallets:/root/.bittensor/wallets -it subnet-llm-validator python neurons/validator.py --netuid 204 --subtensor.chain_endpoint test --wallet.name validator --wallet.hotkey default --axon.port 8091 --axon.external_port 8091 --logging.debug
 
 
 build-validator-api-docker:

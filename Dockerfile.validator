@@ -28,5 +28,8 @@ ENV PATH="/root/.foundry/bin:$PATH"
 COPY neurons ./neurons
 COPY samples ./samples
 
+# axon port
+EXPOSE 8091
+
 # Set the entrypoint
 CMD ["python", "-m", "neurons.validator"]
