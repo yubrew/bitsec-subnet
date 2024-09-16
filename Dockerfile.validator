@@ -2,7 +2,7 @@ FROM python:3.11
 
 # add /app to PYTHONPATH to run neurons
 ENV PATH="/opt/venv/bin:$PATH" \
-  PYTHONPATH="/app"
+    PYTHONPATH="/app"
 
 WORKDIR /app
 

@@ -4,6 +4,9 @@ build-miner-docker:
 run-miner-local:
 	docker run --env-file .env --network="host" -v $${HOME}/.bittensor/wallets:/root/.bittensor/wallets -it subnet-llm-miner python neurons/miner.py --netuid 1 --subtensor.chain_endpoint ws://127.0.0.1:9946 --wallet.name miner --wallet.hotkey default --axon.port 8092 --axon.external_port 8092 --logging.debug
 
+run-miner-testnet:
+	docker run --env-file .env -p 8092:8092 -v $${HOME}/.bittensor/wallets:/root/.bittensor/wallets -it subnet-llm-miner python neurons/miner.py --netuid 204 --subtensor.chain_endpoint test --wallet.name miner --wallet.hotkey default --axon.port 8092 --axon.external_port 8092 --logging.debug
+
 build-validator-docker:
 	docker build -t subnet-llm-validator -f Dockerfile.validator .
 

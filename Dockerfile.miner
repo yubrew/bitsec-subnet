@@ -1,14 +1,28 @@
 FROM python:3.11
 
+ENV PATH="/opt/venv/bin:$PATH" \
+    PYTHONPATH="/app"
+
 WORKDIR /app
 
-COPY neurons /app/neurons
-COPY requirements.txt /app
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
+# Create and activate virtual environment
 RUN python -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
 
+# Install Python dependencies
+COPY requirements.txt .
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
+# Copy application code
+COPY neurons ./neurons
+
+# axon port
+EXPOSE 8092
+
+# Set the entrypoint
 CMD ["python", "neurons/miner.py"]
