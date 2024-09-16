@@ -19,9 +19,6 @@ venv/
 venv.bak/
 *.env
 
-# sample code for tests
-/samples
-
 # contract dependencies
 /node_modules
 package-lock.json
